@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Manrope:wght@500;600;700;800&display=swap');
+
+:root {
+  --bg: #0a0a0f;
+  --bg-soft: #0d0d14;
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --text: #ffffff;
+  --text-muted: #9ca3af;
+  --text-faint: #6b7280;
+  --input-bg: rgba(255,255,255,0.05);
+  --table-head: rgba(255,255,255,0.04);
+}
+
+[data-theme="light"] {
+  --bg: #f5f6fb;
+  --bg-soft: #ffffff;
+  --card: #ffffff;
+  --card-hover: #f0f1f8;
+  --border: rgba(15,15,35,0.08);
+  --text: #16161f;
+  --text-muted: #6b7280;
+  --text-faint: #9ca3af;
+  --input-bg: #f3f4f8;
+  --table-head: #f3f4f8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.font-display { font-family: 'Manrope', sans-serif; }
+
+.text-gradient {
+  background: linear-gradient(120deg, #818cf8, #a855f7, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-twinkle { animation: twinkle 4s ease-in-out infinite; }
+.animate-float { animation: float 6s ease-in-out infinite; }
