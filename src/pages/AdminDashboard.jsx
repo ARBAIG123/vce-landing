@@ -1,3 +1,4 @@
+import CsvImportModal from './CsvImportModal'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase } from '../supabase'
@@ -8,6 +9,7 @@ import {
 } from 'lucide-react'
 
 export default function AdminDashboard({ user, onLogout }) {
+  const [showCsvModal, setShowCsvModal] = useState(false)
   const { theme, toggle } = useTheme()
   const [activeTab, setActiveTab] = useState('overview')
   const [students, setStudents] = useState([])
@@ -81,6 +83,8 @@ export default function AdminDashboard({ user, onLogout }) {
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {[
+            { label: 'Bulk Import Students', sub: 'Upload CSV to create many accounts', icon: Upload, color: '#10b981', action: () => { setCreateRole('student'); setShowCsvModal(true) } },
+            { label: 'Bulk Import Faculty', sub: 'Upload CSV to create many accounts', icon: Upload, color: '#f59e0b', action: () => { setCreateRole('faculty'); setShowCsvModal(true) } },
             { label: 'Total Students', value: students.length, color: '#6366f1', icon: Users },
             { label: 'Total Faculty', value: faculty.length, color: '#22d3ee', icon: BookOpen },
             { label: 'Departments', value: departmentCount, color: '#a855f7', icon: Building2 },
@@ -208,6 +212,11 @@ export default function AdminDashboard({ user, onLogout }) {
       {showCreateModal && (
         <CreateUserModal role={createRole} onClose={() => setShowCreateModal(false)}
           onSuccess={() => { setShowCreateModal(false); fetchUsers() }} />
+      )}
+
+      {showCsvModal && (
+        <CsvImportModal role={createRole} onClose={() => setShowCsvModal(false)}
+          onSuccess={() => { setShowCsvModal(false); fetchUsers() }} />
       )}
     </div>
   )
