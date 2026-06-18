@@ -5,7 +5,7 @@ import { supabase } from '../supabase'
 import { useTheme } from '../ThemeContext'
 import {
   GraduationCap, LogOut, Users, UserPlus, BookOpen, Building2,
-  ChevronRight, Search, X, Eye, EyeOff, Sun, Moon, LayoutGrid
+  ChevronRight, Search, X, Eye, EyeOff, Sun, Moon, LayoutGrid, Upload
 } from 'lucide-react'
 
 export default function AdminDashboard({ user, onLogout }) {
@@ -141,24 +141,26 @@ export default function AdminDashboard({ user, onLogout }) {
                 <h3 className="font-display font-bold mb-4" style={{ color: 'var(--text)' }}>Quick Actions</h3>
                 <div className="space-y-2.5">
                   {[
-                    { label: 'Add New Student', sub: 'Create a student account manually', icon: UserPlus, color: '#6366f1', action: () => { setCreateRole('student'); setShowCreateModal(true) } },
-                    { label: 'Add New Faculty', sub: 'Create a faculty account manually', icon: UserPlus, color: '#22d3ee', action: () => { setCreateRole('faculty'); setShowCreateModal(true) } },
-                  ].map((item, i) => (
-                    <motion.button key={i} onClick={item.action} whileHover={{ x: 3 }}
-                      className="w-full flex items-center justify-between p-3.5 rounded-xl transition group"
-                      style={{ border: '1px solid var(--border)', background: 'var(--bg-soft)' }}>
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-lg grid place-items-center" style={{ background: `${item.color}1A` }}>
-                          <item.icon className="w-4 h-4" style={{ color: item.color }} />
-                        </div>
-                        <div className="text-left">
-                          <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>{item.label}</div>
-                          <div className="text-xs" style={{ color: 'var(--text-faint)' }}>{item.sub}</div>
-                        </div>
-                      </div>
-                      <ChevronRight className="w-4 h-4 transition group-hover:translate-x-0.5" style={{ color: 'var(--text-faint)' }} />
-                    </motion.button>
-                  ))}
+  { label: 'Add New Student', sub: 'Create a student account manually', icon: UserPlus, color: '#6366f1', action: () => { setCreateRole('student'); setShowCreateModal(true) } },
+  { label: 'Add New Faculty', sub: 'Create a faculty account manually', icon: UserPlus, color: '#22d3ee', action: () => { setCreateRole('faculty'); setShowCreateModal(true) } },
+  { label: 'Bulk Import Students', sub: 'Upload CSV to create many accounts', icon: Upload, color: '#10b981', action: () => { setCreateRole('student'); setShowCsvModal(true) } },
+  { label: 'Bulk Import Faculty', sub: 'Upload CSV to create many accounts', icon: Upload, color: '#f59e0b', action: () => { setCreateRole('faculty'); setShowCsvModal(true) } },
+].map((item, i) => (
+  <motion.button key={i} onClick={item.action} whileHover={{ x: 3 }}
+    className="w-full flex items-center justify-between p-3.5 rounded-xl transition group"
+    style={{ border: '1px solid var(--border)', background: 'var(--bg-soft)' }}>
+    <div className="flex items-center gap-3">
+      <div className="w-9 h-9 rounded-lg grid place-items-center" style={{ background: `${item.color}1A` }}>
+        <item.icon className="w-4 h-4" style={{ color: item.color }} />
+      </div>
+      <div className="text-left">
+        <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>{item.label}</div>
+        <div className="text-xs" style={{ color: 'var(--text-faint)' }}>{item.sub}</div>
+      </div>
+    </div>
+    <ChevronRight className="w-4 h-4 transition group-hover:translate-x-0.5" style={{ color: 'var(--text-faint)' }} />
+  </motion.button>
+))}
                 </div>
               </div>
 
