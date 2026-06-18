@@ -156,7 +156,7 @@ export default function AdminDashboard({ user, onLogout }) {
       <div className="text-left">
         <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>{item.label}</div>
         <div className="text-xs" style={{ color: 'var(--text-faint)' }}>{item.sub}</div>
-      </div>
+      </div>  
     </div>
     <ChevronRight className="w-4 h-4 transition group-hover:translate-x-0.5" style={{ color: 'var(--text-faint)' }} />
   </motion.button>
@@ -350,43 +350,41 @@ function CreateUserModal({ role, onClose, onSuccess }) {
   const inputStyle = { background: 'var(--input-bg)', border: '1px solid var(--border)', color: 'var(--text)' }
 
   async function handleCreate(e) {
-    e.preventDefault()
-    setLoading(true)
-    setError('')
+  e.preventDefault()
+  setLoading(true)
+  setError('')
 
-    try {
-      const { data, error: authError } = await supabase.auth.admin.createUser({
-        email: form.email,
-        password: form.password,
-        email_confirm: true
-      })
-      if (authError) throw authError
-
-      const profileData = {
-        id: data.user.id,
-        name: form.name,
-        email: form.email,
-        role,
-        department: form.department,
-      }
-
-      if (role === 'student') {
-        profileData.year = parseInt(form.year)
-        profileData.section = form.section
-        profileData.roll_number = form.roll_number
-      } else {
-        profileData.staff_id = form.staff_id
-      }
-
-      const { error: profileError } = await supabase.from('profiles').insert(profileData)
-      if (profileError) throw profileError
-
-      onSuccess()
-    } catch (err) {
-      setError(err.message)
+  try {
+    const userPayload = {
+      name: form.name,
+      email: form.email,
+      password: form.password,
+      role,
+      department: form.department,
+      year: form.year,
+      section: form.section,
+      roll_number: form.roll_number,
+      staff_id: form.staff_id,
     }
-    setLoading(false)
+
+    const response = await fetch('/api/bulk-create-users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ users: [userPayload] })
+    })
+
+    const data = await response.json()
+    if (data.error) throw new Error(data.error)
+
+    const result = data.results?.[0]
+    if (result?.status === 'failed') throw new Error(result.reason)
+
+    onSuccess()
+  } catch (err) {
+    setError(err.message)
   }
+  setLoading(false)
+}
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
@@ -460,7 +458,7 @@ function CreateUserModal({ role, onClose, onSuccess }) {
                   <label className="block text-xs font-medium mb-1" style={{ color: 'var(--text-muted)' }}>Section *</label>
                   <select value={form.section} onChange={e => setForm({ ...form, section: e.target.value })}
                     className="w-full px-3 py-2.5 rounded-xl text-sm outline-none" style={inputStyle}>
-                    {['A', 'B', 'C', 'D', 'E'].map(s => <option key={s} value={s}>{s}</option>)}
+                    {['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'].map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </div>
                 <div>

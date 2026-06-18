@@ -67,3 +67,10 @@ body {
 }
 .animate-twinkle { animation: twinkle 4s ease-in-out infinite; }
 .animate-float { animation: float 6s ease-in-out infinite; }
+select {
+  color-scheme: dark;
+}
+
+[data-theme="light"] select {
+  color-scheme: light;
+}
