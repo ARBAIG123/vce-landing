@@ -5,6 +5,14 @@ import RingChart from '../RingChart'
 import AssignmentCard from '../AssignmentCard'
 import { BookOpen, TrendingUp, GraduationCap, Bell, AlertTriangle } from 'lucide-react'
 
+function getGreeting() {
+  const h = new Date().getHours()
+  if (h < 12) return 'Good morning'
+  if (h < 17) return 'Good afternoon'
+  if (h < 21) return 'Good evening'
+  return 'Good night'
+}
+
 export default function OverviewTab({ user }) {
   const [marks, setMarks] = useState([])
   const [attendance, setAttendance] = useState([])
@@ -54,7 +62,7 @@ export default function OverviewTab({ user }) {
 
   return (
     <div>
-      <h1 className="font-display text-2xl font-bold mb-1" style={{ color: 'var(--text)' }}>Good day, {user.name?.split(' ')[0]}! 👋</h1>
+      <h1 className="font-display text-2xl font-bold mb-1" style={{ color: 'var(--text)' }}>{getGreeting()}, {user.name?.split(' ')[0]}! 👋</h1>
       <p className="text-sm mb-6" style={{ color: 'var(--text-faint)' }}>{user.department} · Year {user.year} · Section {user.section} · {user.roll_number}</p>
 
       {belowThreshold && (

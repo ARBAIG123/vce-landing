@@ -69,19 +69,22 @@ body {
 .animate-float { animation: float 6s ease-in-out infinite; }
 select {
   color-scheme: dark;
+  background-color: #1e1e2e !important;
+  color: #ffffff !important;
+}
+
+select option {
+  background-color: #1e1e2e !important;
+  color: #ffffff !important;
 }
 
 [data-theme="light"] select {
   color-scheme: light;
+  background-color: #f3f4f8 !important;
+  color: #16161f !important;
 }
 
-select {
-  color-scheme: dark;
-}
-[data-theme="light"] select {
-  color-scheme: light;
-}
-select, select option {
-  background-color: var(--input-bg);
-  color: var(--text);
+[data-theme="light"] select option {
+  background-color: #f3f4f8 !important;
+  color: #16161f !important;
 }
