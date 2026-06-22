@@ -74,3 +74,14 @@ select {
 [data-theme="light"] select {
   color-scheme: light;
 }
+
+select {
+  color-scheme: dark;
+}
+[data-theme="light"] select {
+  color-scheme: light;
+}
+select, select option {
+  background-color: var(--input-bg);
+  color: var(--text);
+}

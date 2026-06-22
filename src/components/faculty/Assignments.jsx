@@ -1,3 +1,4 @@
+import AssignmentCard from '../AssignmentCard'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { supabase } from '../../supabase'
@@ -104,27 +105,12 @@ export default function Assignments({ user }) {
       </form>
 
       <div className="space-y-2">
-        {loading ? <div className="text-sm" style={{ color: 'var(--text-faint)' }}>Loading...</div> : assignments.length === 0 ? (
-          <div className="rounded-2xl p-10 text-center text-sm" style={{ background: 'var(--card)', border: '1px solid var(--border)', color: 'var(--text-faint)' }}>No assignments created yet</div>
-        ) : assignments.map(a => {
-          const isPastDue = new Date(a.deadline) < new Date()
-          return (
-            <div key={a.id} className="rounded-xl p-4 flex items-center justify-between" style={{ background: 'var(--card)', border: '1px solid var(--border)' }}>
-              <div>
-                <div className="text-sm font-semibold" style={{ color: 'var(--text)' }}>{a.title}</div>
-                <div className="text-xs mt-0.5 flex items-center gap-3" style={{ color: 'var(--text-faint)' }}>
-                  <span>{a.department} · Year {a.year} · Section {a.section}</span>
-                  <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{new Date(a.deadline).toLocaleDateString()}</span>
-                  {isPastDue && <span className="font-semibold" style={{ color: '#f43f5e' }}>🚨 Past due</span>}
-                </div>
-              </div>
-              <button onClick={() => deleteAssignment(a.id)} className="p-2 rounded-lg transition hover:bg-red-500/10" style={{ color: 'var(--text-faint)' }}>
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
-          )
-        })}
-      </div>
+  {loading ? <div className="text-sm" style={{ color: 'var(--text-faint)' }}>Loading...</div> : assignments.length === 0 ? (
+    <div className="rounded-2xl p-10 text-center text-sm" style={{ background: 'var(--card)', border: '1px solid var(--border)', color: 'var(--text-faint)' }}>No assignments created yet</div>
+  ) : assignments.map(a => (
+    <AssignmentCard key={a.id} assignment={a} onDelete={deleteAssignment} />
+  ))}
+</div>
     </div>
   )
 }
