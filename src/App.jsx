@@ -440,7 +440,7 @@ function SectionHeader({ eyebrow, title, subtitle }) {
 // ─── Landing Page ─────────────────────────────────────────────
 function LandingPage({ onLoginClick }) {
   return (
-    <div className="relative min-h-screen overflow-x-clip" style={{ background: '#0a0a0f' }}>
+    <div className="landing-dark relative min-h-screen overflow-x-clip" style={{ background: '#0a0a0f' }}>
       <ScrollProgress />
       <Nav onLoginClick={onLoginClick} />
       <main>
