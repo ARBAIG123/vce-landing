@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { LogOut } from 'lucide-react'
 
 export default function SignOutConfirm({ onConfirm, onCancel }) {

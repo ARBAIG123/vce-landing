@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { AnimatePresence } from 'framer-motion'
-import SignOutConfirm from '../SignOutConfirm'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Users, ClipboardList, CalendarCheck, FileBarChart, ListChecks, GraduationCap, LogOut, Sun, Moon } from 'lucide-react'
+import SignOutConfirm from '../SignOutConfirm'
 
 export default function FacultySidebar({ active, setActive, theme, toggleTheme, user, onLogout }) {
     const [showSignOut, setShowSignOut] = useState(false)

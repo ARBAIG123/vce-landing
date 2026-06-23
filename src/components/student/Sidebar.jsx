@@ -1,11 +1,8 @@
 import { useState } from 'react'
-import { AnimatePresence } from 'framer-motion'
-import SignOutConfirm from '../SignOutConfirm'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { LayoutDashboard, CalendarDays, Calculator, Bot, GraduationCap, LogOut, Sun, Moon } from 'lucide-react'
 import NotificationPopup from './NotificationPopup'
-
-const [showSignOut, setShowSignOut] = useState(false)
+import SignOutConfirm from '../SignOutConfirm'
 
 function getGreeting() {
   const h = new Date().getHours()
@@ -16,6 +13,8 @@ function getGreeting() {
 }
 
 export default function Sidebar({ active, setActive, theme, toggleTheme, user, onLogout }) {
+    const [showSignOut, setShowSignOut] = useState(false)
+    
   const items = [
     { id: 'overview', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'calendar', label: 'Calendar', icon: CalendarDays },
