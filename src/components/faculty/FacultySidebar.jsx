@@ -1,7 +1,11 @@
+import { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import SignOutConfirm from '../SignOutConfirm'
 import { motion } from 'framer-motion'
 import { Users, ClipboardList, CalendarCheck, FileBarChart, ListChecks, GraduationCap, LogOut, Sun, Moon } from 'lucide-react'
 
 export default function FacultySidebar({ active, setActive, theme, toggleTheme, user, onLogout }) {
+    const [showSignOut, setShowSignOut] = useState(false)
   const items = [
     { id: 'students', label: 'Students', icon: Users },
     { id: 'marks', label: 'Enter Marks', icon: ClipboardList },
@@ -42,18 +46,16 @@ export default function FacultySidebar({ active, setActive, theme, toggleTheme, 
       </div>
 
       <div className="border-t pt-3 mt-3 space-y-1" style={{ borderColor: 'var(--border)' }}>
-        <button onClick={toggleTheme}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition hover:bg-[var(--card-hover)]"
-          style={{ color: 'var(--text-muted)' }}>
-          {theme === 'dark' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-          {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
-        </button>
-        <div className="px-3 py-2 text-xs truncate" style={{ color: 'var(--text-faint)' }}>👨‍🏫 {user.name}</div>
-        <button onClick={onLogout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition hover:bg-red-500/10 hover:text-red-400"
-          style={{ color: 'var(--text-muted)' }}>
-          <LogOut className="w-4 h-4" /> Sign Out
-        </button>
+        <button onClick={() => setShowSignOut(true)}
+  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition hover:bg-red-500/10 hover:text-red-400"
+  style={{ color: 'var(--text-muted)' }}>
+  <LogOut className="w-4 h-4" /> Sign Out
+</button>
+        <AnimatePresence>
+  {showSignOut && (
+    <SignOutConfirm onConfirm={onLogout} onCancel={() => setShowSignOut(false)} />
+  )}
+</AnimatePresence>
       </div>
     </div>
   )

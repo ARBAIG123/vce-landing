@@ -120,17 +120,16 @@ function Hero({ onLoginClick }) {
 
         <h1 className="font-display font-bold tracking-tighter text-5xl sm:text-7xl md:text-8xl leading-tight mb-6">
           <motion.span initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
-            className="block text-white">Track Your</motion.span>
+            className="block text-white">One Platform for</motion.span>
           <motion.span initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.25 }}
-            className="block text-gradient">Attendance & CGPA</motion.span>
+            className="block text-gradient">Students & Faculty</motion.span>
           <motion.span initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4 }}
-            className="block text-white">Instantly.</motion.span>
+            className="block text-white">at VCE.</motion.span>
         </h1>
 
         <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.55 }}
           className="max-w-2xl mx-auto text-base sm:text-lg text-gray-400 leading-relaxed mb-10">
-          No manual entry. No guesswork. One click and see your real-time attendance,
-          safe bunk count, and CGPA — pulled directly from the VCE portal.
+          A unified academic portal for Vardhaman College of Engineering. Students track attendance and performance. Faculty manage marks, take attendance, and generate reports — all in one place.
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }}
@@ -151,9 +150,9 @@ function Hero({ onLoginClick }) {
           style={{ boxShadow: '0 30px 80px -20px rgba(0,0,0,0.6)' }}>
           <div className="grid grid-cols-3 divide-x divide-white/10">
             {[
-              { v: '75%', l: 'Minimum attendance' },
-              { v: '1 click', l: 'To see all your data' },
-              { v: '0 logins', l: 'No separate account' },
+              { v: '80%', l: 'Attendance threshold' },
+{ v: '2 portals', l: 'Student & Faculty' },
+{ v: '1 platform', l: 'Everything academic' },
             ].map((s, i) => (
               <div key={i} className="px-4 py-6 text-center">
                 <div className="font-display text-3xl sm:text-4xl font-bold text-gradient">{s.v}</div>
@@ -177,10 +176,10 @@ function Hero({ onLoginClick }) {
 
 // ─── How It Works ─────────────────────────────────────────────
 const steps = [
-  { n: '01', icon: Globe, title: 'Visit VCE Portal', text: 'Go to student.vardhaman.org and log in with your college credentials as you normally would.' },
-  { n: '02', icon: Bookmark, title: 'Save the Bookmark', text: 'Drag the VCE Tracker button from our homepage to your browser bookmarks bar. One-time setup.' },
-  { n: '03', icon: MousePointerClick, title: 'Click While on Portal', text: 'While logged into the VCE portal, click the bookmark. It reads your data instantly using your session.' },
-  { n: '04', icon: BarChart3, title: 'See Your Dashboard', text: 'Your attendance, safe bunk count, CGPA and subject-wise breakdown loads in a beautiful dashboard.' },
+  { n: '01', icon: Globe, title: 'Request Access', text: 'Your college admin creates your account. Students and faculty receive login credentials via their institutional email.' },
+  { n: '02', icon: Bookmark, title: 'Sign In to Your Portal', text: 'Students access their attendance, marks, and performance dashboard. Faculty get access to their section management tools.' },
+  { n: '03', icon: MousePointerClick, title: 'Faculty Enter Data', text: 'Faculty take attendance, enter exam marks, create assignments, and generate class performance reports instantly.' },
+  { n: '04', icon: BarChart3, title: 'Students Track Progress', text: 'Students view subject-wise attendance, performance graphs, assignment deadlines, and get alerts when below threshold.' },
 ]
 
 function HowItWorks() {
@@ -191,8 +190,8 @@ function HowItWorks() {
   return (
     <section id="how" className="relative py-32 px-6">
       <SectionHeader eyebrow="How It Works"
-        title={<>Your Smart <span className="text-gradient">Student Journey</span></>}
-        subtitle="From portal to insights — your academic data in under a minute." />
+        title={<>How <span className="text-gradient">It Works</span></>}
+subtitle="Simple steps for students and faculty to get started on the platform." />
       <div ref={ref} className="relative mt-20 max-w-4xl mx-auto">
         <div className="absolute left-7 md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-px" />
         <motion.div className="absolute left-7 md:left-1/2 top-0 w-px md:-translate-x-px"
@@ -241,12 +240,12 @@ function StepRow({ step, index }) {
 
 // ─── Features ─────────────────────────────────────────────────
 const features = [
-  { icon: TrendingUp, title: 'Live Attendance', text: 'Subject-wise attendance percentages pulled directly from your VCE portal in real time.', grad: 'from-indigo-500 to-cyan-400' },
-  { icon: Target, title: 'Safe Bunk Count', text: 'Know exactly how many classes you can skip while staying safely above the 75% threshold.', grad: 'from-purple-500 to-indigo-500' },
-  { icon: Trophy, title: 'CGPA Insights', text: 'Track your CPI semester by semester and log individual assessment marks per subject.', grad: 'from-cyan-400 to-purple-500' },
-  { icon: Calculator, title: 'CGPA Calculator', text: 'Predict your next semester CGPA by entering subjects, credits and expected grades.', grad: 'from-indigo-500 to-purple-500' },
-  { icon: AlertTriangle, title: 'At Risk Alerts', text: 'Color-coded indicators show which subjects need immediate attention before it is too late.', grad: 'from-purple-500 to-cyan-400' },
-  { icon: Zap, title: 'One Click', text: 'No separate login, no manual input. One bookmark click and everything loads instantly.', grad: 'from-cyan-400 to-indigo-500' },
+  { icon: TrendingUp, title: 'Live Attendance', text: 'Faculty mark attendance via roll number pills. Students see subject-wise percentages with Safe, Borderline, and At Risk status.', grad: 'from-indigo-500 to-cyan-400' },
+  { icon: Target, title: 'Threshold Alerts', text: 'Automatic red flag notifications when student attendance drops below the 80% required threshold.', grad: 'from-purple-500 to-indigo-500' },
+  { icon: Trophy, title: 'Performance Analytics', text: 'Visual performance graphs per student across all exams. Faculty can filter by subject and exam type.', grad: 'from-cyan-400 to-purple-500' },
+  { icon: Calculator, title: 'CGPA Predictor', text: 'Students predict their semester GPA and cumulative CGPA by entering subjects, credits, and expected grades.', grad: 'from-indigo-500 to-purple-500' },
+  { icon: AlertTriangle, title: 'Runners & Peak Reports', text: 'Faculty generate instant PDF-ready reports classifying students as Peak performers or Runners who need attention.', grad: 'from-purple-500 to-cyan-400' },
+  { icon: Zap, title: 'Assignments & Notifications', text: 'Faculty create section-wise assignments. Students get real-time popup notifications for pending and overdue tasks.', grad: 'from-cyan-400 to-indigo-500' },
 ]
 
 function Features() {
@@ -479,7 +478,7 @@ export default function App() {
   )
 
   if (showLogin || user) {
-    if (!user) return <Login onLogin={setUser} />
+  if (!user) return <Login onLogin={setUser} onBack={() => setShowLogin(false)} />
     if (user.role === 'admin')
   return <AdminDashboard user={user} onLogout={() => setUser(null)} />
 if (user.role === 'faculty')

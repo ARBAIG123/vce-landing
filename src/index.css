@@ -131,3 +131,9 @@ select option {
 .landing-dark a {
   color: inherit;
 }
+.landing-dark .text-gradient {
+  background: linear-gradient(120deg, #818cf8, #a855f7, #22d3ee) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}

@@ -98,7 +98,7 @@ export default function CalendarTab({ user }) {
                 <div key={d} className="text-center text-xs font-semibold py-1" style={{ color: 'var(--text-faint)' }}>{d}</div>
               ))}
             </div>
-            <div className="grid grid-cols-7 gap-1.5">
+            <div className="grid grid-cols-7 gap-1">
               {Array.from({ length: firstDay }).map((_, i) => <div key={`e${i}`} />)}
               {Array.from({ length: daysInMonth }).map((_, i) => {
                 const day = i + 1
@@ -106,7 +106,8 @@ export default function CalendarTab({ user }) {
                 const status = records[dateStr]
                 const isToday = today.getFullYear() === year && today.getMonth() === month && today.getDate() === day
                 return (
-                  <div key={day} className="aspect-square rounded-lg flex flex-col items-center justify-center text-xs"
+                  <div key={day} className="rounded-lg flex flex-col items-center justify-center text-xs"
+  style={{ height: '36px' }}
                     style={{
                       background: status ? `${statusColor[status]}1A` : 'var(--input-bg)',
                       border: isToday ? '1.5px solid #6366f1' : '1px solid var(--border)',

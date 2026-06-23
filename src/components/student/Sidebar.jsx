@@ -1,6 +1,11 @@
+import { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import SignOutConfirm from '../SignOutConfirm'
 import { motion } from 'framer-motion'
 import { LayoutDashboard, CalendarDays, Calculator, Bot, GraduationCap, LogOut, Sun, Moon } from 'lucide-react'
 import NotificationPopup from './NotificationPopup'
+
+const [showSignOut, setShowSignOut] = useState(false)
 
 function getGreeting() {
   const h = new Date().getHours()
@@ -31,11 +36,15 @@ export default function Sidebar({ active, setActive, theme, toggleTheme, user, o
           </div>
           <span className="font-display font-bold text-sm" style={{ color: 'var(--text)' }}>VCE Tracker</span>
         </div>
-        <div className="rounded-xl p-3" style={{ background: 'var(--card)', border: '1px solid var(--border)' }}>
-          <div className="text-xs font-semibold" style={{ color: 'var(--text-faint)' }}>{getGreeting()},</div>
-          <div className="text-sm font-bold mt-0.5 truncate" style={{ color: 'var(--text)' }}>{user.name?.split(' ')[0]} 👋</div>
-          <div className="text-xs mt-0.5 truncate" style={{ color: 'var(--text-faint)' }}>{user.department} · {user.roll_number}</div>
-        </div>
+        <div className="rounded-xl p-3 flex items-center gap-2.5" style={{ background: 'var(--card)', border: '1px solid var(--border)' }}>
+  <img src="/vce-logo.png" alt="VCE" className="w-9 h-9 rounded-lg object-contain flex-shrink-0"
+    style={{ background: 'white', padding: '2px' }}
+    onError={e => { e.target.style.display='none' }} />
+  <div className="min-w-0">
+    <div className="text-xs font-bold truncate" style={{ color: 'var(--text)' }}>Vardhaman College</div>
+    <div className="text-xs truncate" style={{ color: 'var(--text-faint)' }}>{user.department} · {user.roll_number}</div>
+  </div>
+</div>
       </div>
 
       {/* Nav items */}
@@ -56,19 +65,17 @@ export default function Sidebar({ active, setActive, theme, toggleTheme, user, o
       </div>
 
       {/* Bottom controls */}
-      <div className="border-t pt-3 mt-3 space-y-1" style={{ borderColor: 'var(--border)' }}>
-        <button onClick={toggleTheme}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition hover:bg-[var(--card-hover)]"
-          style={{ color: 'var(--text-muted)' }}>
-          {theme === 'dark' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-          {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
-        </button>
-        <button onClick={onLogout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition hover:bg-red-500/10 hover:text-red-400"
-          style={{ color: 'var(--text-muted)' }}>
-          <LogOut className="w-4 h-4" /> Sign Out
-        </button>
-      </div>
+      <button onClick={() => setShowSignOut(true)}
+  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition hover:bg-red-500/10 hover:text-red-400"
+  style={{ color: 'var(--text-muted)' }}>
+  <LogOut className="w-4 h-4" /> Sign Out
+</button>
+
+<AnimatePresence>
+  {showSignOut && (
+    <SignOutConfirm onConfirm={onLogout} onCancel={() => setShowSignOut(false)} />
+  )}
+</AnimatePresence>
     </div>
   )
 }
